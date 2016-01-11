@@ -232,20 +232,10 @@ def get_action(player, history, opponent_history, score, opponent_score, getting
             # to compute your strategy
             if len(opponent_history)==0: #It's the first round: collude
                 return 'c'
-            elif len(opponent_history)==2:
-                if history[-2]=='b' and opponent_history[-2]=='b' and history[-2]=='b' and opponent_history[-2]=='b':
-                    return 'c'
-                elif history[-2]=='c' and opponent_history[-2]=='c' and history[-1]=='c' and opponent_history[-1]=='c':
-                    return 'b'
-                else:
-                    return 'b'
-            elif history[-1]=='c' and history[-1]=='b':
-                return 'b'
-            elif history[-1]=='c' and opponent_history[-1]=='c':
-                return 'c'
-
+            elif history[-1]=='c' and opponent_history[-1]=='b':
+                return 'b' # betray is they were severely punished last time
             else:
-                return 'b' #otherwise collude
+                return 'c' #otherwise collude
     
     
     
@@ -735,8 +725,3 @@ def play_tournament(num_players):
                str(int(scores[player])/num_players) , ' points: ',
                team_names[player])
     
-
-
-
-
-#blah blah blah
