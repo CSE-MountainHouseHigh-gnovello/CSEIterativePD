@@ -20,6 +20,7 @@ Version 8/23/2013
 '''
 
 import random
+import math
 def play_round(player1, player2, history1, history2, score1, score2):
     '''
     Calls the get_action() function which will get the characters
@@ -303,28 +304,18 @@ def get_action(player, history, opponent_history, score, opponent_score, getting
         if getting_team_name:
             return 'Achlec'
         else:
-            cursor = 0
-            subCursor = 0
-            scores = []
             combos = [['c','b','c','b'],['c','b','b','c'], ['c','b','c','c'], ['c','b','b','b'], ['b','c','c','b'], ['b','c','b','c'], ['b','c','c','c'], ['b','c','b','b'], ['c', 'c', 'c', 'b'], ['c', 'c', 'b', 'c'], ['c', 'c', 'c', 'c'], ['c', 'c', 'b', 'b'], ['b', 'b', 'c', 'b'], ['b', 'b', 'b', 'c'], ['b', 'b', 'c', 'c'], ['b', 'b', 'b', 'b']]
             if len(opponent_history)==0:
-                return combos[cursor][subCursor]
+                return 'c'
             else:
-                subCursor += 1
-                if subCursor == 4:
-                    subCursor = 0
-                    cursor += 1
-                    if len(scores) == 0:    
-                        scores.append(score)
-                    else:
-                        scores.append(score-scores[len(scores)])
-                    if cursor == 16:
-                        highest = 0
-                        for x in range(0,len(scores)):
-                            if scores[x] >= highest:
-                                highest = x
-                return combos[cursor][subCursor]
-                
+                if len(opponent_history) > 63:
+                    scores = []
+                    localScore = 0
+                    for x in range(0,len(opponent_history)):
+                        
+                localCombo = math.modf((len(opponent_history))/4)
+                return combos[int(localCombo[0])][int(localCombo[1]*4)]
+                    
                             
         '''else:
         # use history, opponent_history, score, opponent_score
