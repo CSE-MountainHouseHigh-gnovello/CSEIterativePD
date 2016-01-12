@@ -311,8 +311,21 @@ def get_action(player, history, opponent_history, score, opponent_score, getting
                 if len(opponent_history) > 63:
                     scores = []
                     localScore = 0
+                    cursor = 0
                     for x in range(0,len(opponent_history)):
-                        
+                        if opponent_history[x] == 'c':
+                            if history[x] == 'b':
+                                localScore += 100
+                        elif opponent_history[x] == 'b':
+                            if history[x] == 'b':
+                                localScore -= 250
+                            elif history[x] == 'c':
+                                localScore -= 500 
+                        cursor += 1
+                        if cursor == 4:
+                            cursor = 0
+                            scores.append(localScore)
+                            localScore = 0
                 localCombo = math.modf((len(opponent_history))/4)
                 return combos[int(localCombo[0])][int(localCombo[1]*4)]
                     
