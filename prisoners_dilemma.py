@@ -346,12 +346,12 @@ def get_action(player, history, opponent_history, score, opponent_score, getting
     #
     elif player == 9:
         if getting_team_name:
-            return 'Four steps ahead'
+            return '5 powers ahead'
         else:
             # use history, opponent_history, score, opponent_score
             # to compute your strategy
-            if score-opponent_score>10: #Checking if the opponent has more  
-                                        #than 4 less than the player
+            if score-opponent_score>100000: #Checking if the opponent has more  
+                                        #than 5 powers more than the player
                 return 'c' #if so, collude
             else:
                 return 'b' #otherwise, betray
