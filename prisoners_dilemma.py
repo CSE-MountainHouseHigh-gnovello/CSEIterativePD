@@ -308,7 +308,7 @@ def get_action(player, history, opponent_history, score, opponent_score, getting
             scores = []
             combos = [['c','b','c','b'],['c','b','b','c'], ['c','b','c','c'], ['c','b','b','b'], ['b','c','c','b'], ['b','c','b','c'], ['b','c','c','c'], ['b','c','b','b'], ['c', 'c', 'c', 'b'], ['c', 'c', 'b', 'c'], ['c', 'c', 'c', 'c'], ['c', 'c', 'b', 'b'], ['b', 'b', 'c', 'b'], ['b', 'b', 'b', 'c'], ['b', 'b', 'c', 'c'], ['b', 'b', 'b', 'b']]
             if len(opponent_history)==0:
-                return 'b'
+                return combos[cursor][subCursor]
             else:
                 subCursor += 1
                 if subCursor == 4:
