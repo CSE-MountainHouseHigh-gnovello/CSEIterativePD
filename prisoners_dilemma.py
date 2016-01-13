@@ -308,7 +308,7 @@ def get_action(player, history, opponent_history, score, opponent_score, getting
             if len(opponent_history)==0:
                 return 'c'
             else:
-                if len(opponent_history) > 63:
+                if len(opponent_history) >= 63:
                     scores = []
                     localScore = 0
                     cursor = 0
@@ -326,8 +326,11 @@ def get_action(player, history, opponent_history, score, opponent_score, getting
                             cursor = 0
                             scores.append(localScore)
                             localScore = 0
-                localCombo = math.modf((len(opponent_history))/4)
-                return combos[int(localCombo[0])][int(localCombo[1]*4)]
+                    localCombo = math.modf((len(opponent_history)/4))
+                    return combos[scores.index(max(scores))][int(localCombo[0]*4)]
+                localCombo = math.modf(float((len(opponent_history))/4))
+                print(str(localCombo[0]) + "," + str(localCombo[1]))
+                return combos[int(localCombo[1])][int(localCombo[0]*4)]
                     
                             
         '''else:
@@ -615,14 +618,14 @@ def play_tournament(num_players):
     # each element will become a column for each player
     # range is just to get list of correct size
     result_table=range(num_players)     
-    moves_table=range(num_players) 
+    moves_table=range(num_players)
     
     
     for player1 in range(num_players):  
         # create the column for each player
         # range just to get list of correct size
         result_table[player1]=range(num_players) 
-        result_table[player1][player1]=0 # initialize unused diagonal to 0
+        #result_table[player1][player1]=0 # initialize unused diagonal to 0
         moves_table[player1]=range(num_players)
         # play a game between with every other player of lower number
         for player2 in range(player1):
