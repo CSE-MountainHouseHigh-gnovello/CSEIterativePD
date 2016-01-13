@@ -16,7 +16,7 @@ Aggregated results are stored in tournament.txt
 Unpublished work (c)2013 Project Lead The Way
 CSE Project 1.3.5 Collaborating on a Project
 Draft, Do Not Distribute
-Version 8/23/2013 
+Version 1/11/2015 
 '''
 
 import random
@@ -359,22 +359,15 @@ def get_action(player, history, opponent_history, score, opponent_score, getting
     #
     elif player == 9:
         if getting_team_name:
-            return 'loyal vengeful'
+            return '5 powers ahead'
         else:
             # use history, opponent_history, score, opponent_score
             # to compute your strategy
-            if len(opponent_history)==0: #It's the first round: collude
-                return 'c'
-            elif history[-1]=='c' and opponent_history[-1]=='b':
-                return 'b' # betray is they were severely punished last time
+            if score-opponent_score>100000: #Checking if the opponent has more  
+                                        #than 5 powers more than the player
+                return 'c' #if so, collude
             else:
-                return 'c' #otherwise collude
-
-
-
-
-
-
+                return 'b' #otherwise, betray
 
 
 
@@ -384,16 +377,32 @@ def get_action(player, history, opponent_history, score, opponent_score, getting
     #
     elif player == 10:
         if getting_team_name:
-            return 'loyal vengeful'
+            return 'The Balancer'
         else:
-            # use history, opponent_history, score, opponent_score
-            # to compute your strategy
-            if len(opponent_history)==0: #It's the first round: collude
+            opponent_colludes = 0 #these variables are used to add up
+            self_colludes = 0     #the previous actions
+            opponent_backstabs = 0
+            self_backstabs = 0
+            for action in opponent_history: #this for loop counts the 
+                if action == 'c':           #opponent's actions.
+                    opponent_colludes+=1
+                elif action == 'b':
+                    opponent_backstabs+=1
+            for action in history:         #this for loop counts the
+                if action == 'c':          #player's actions.
+                    self_colludes+=1
+                if action == 'b':
+                    self_backstabs+=1
+            #This if condition checks both of player's actions and adds them up.
+            #If one action (betray or collude) has more instances than the other 
+            #action, then the player will choose the side that has less actions.
+            if (opponent_colludes + self_colludes) > (opponent_backstabs + self_backstabs):
+                return 'b'
+            elif (opponent_backstabs + self_backstabs) > (opponent_colludes + self_colludes):
                 return 'c'
-            elif history[-1]=='c' and opponent_history[-1]=='b':
-                return 'b' # betray is they were severely punished last time
             else:
-                return 'c' #otherwise collude
+                #if they're even, then chose a random action. why not.
+                return random.choice(['c', 'b'])
 
 
 
