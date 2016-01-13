@@ -742,5 +742,3 @@ def play_tournament(num_players):
 
 
 
-
-#blah blah blah
