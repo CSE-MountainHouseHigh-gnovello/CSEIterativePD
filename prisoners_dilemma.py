@@ -230,30 +230,26 @@ def get_action(player, history, opponent_history, score, opponent_score, getting
         else:
             # use history, opponent_history, score, opponent_score
             # to compute your strategy
+            
+            # original plan was to create a counter for the number of betrayals and colludes of the opponent
+            # but the plan did not end up working out so we went for the more conventional approach
             if len(opponent_history)==0: #It's the first round: collude
                 return 'c'
-            elif len(opponent_history)>=2:
-                betrayals = 0
-                colludes = 0
-                for x in range(0, len(opponent_history)):
-                    variable = opponent_history[-x]
-                    if variable=='b':
-                        betrayals = betrayals + 1
-                    if variable=='c':
-                        colludes = colludes + 1
-                print(betrayals)
-                if opponent_history[-2]=='b' and opponent_history[-1]=='b':
-                    return 'c'
-                elif opponent_history[-2]=='c' and opponent_history[-1]=='c':
+            elif len(opponent_history)>=2: #Checks whether 2 rounds have went through.
+                if opponent_history[-2]=='b' and opponent_history[-1]=='b': #This if statement checks whether if the opponent has betrayed twice in a row the previous two rounds
+                    return 'b'
+                elif opponent_history[-2]=='c' and opponent_history[-1]=='c': #This if statement checks whether the opponent has colluded twice in a row the past two rounds.
                     return 'b'
                 else:
                     return 'c'
 
-            elif history[-1]=='c' and opponent_history[-1]=='c':
+            elif history[-1]=='c' and opponent_history[-1]=='c': #This if statement checks if both the opponent and the player had colluded the past round
                 return 'b'
-
+            elif history[-1]=='c' and opponent_history[-1]=='b': #This if statement checks if the player lost to the opponent by colluding when the opponent betrayed
+                return 'b'
+            
             else:
-                return 'c' #otherwise collude
+                return 'b' #otherwise collude
     
     
     
