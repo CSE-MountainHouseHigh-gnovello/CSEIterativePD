@@ -296,7 +296,7 @@ def get_action(player, history, opponent_history, score, opponent_score, getting
 
       ######
 #
-    elif player == 8:
+        elif player == 8:
         if getting_team_name:
             return 'Achlec'
         else:
@@ -323,10 +323,10 @@ def get_action(player, history, opponent_history, score, opponent_score, getting
                             scores.append(localScore)
                             localScore = 0
                     localCombo = math.modf((len(opponent_history)/4))
-                    return combos[scores.index(max(scores))][int(len(opponent_history)%4)]
+                    return combos[scores.index(max(scores))][int(localCombo[0]*4)]
                 localCombo = math.modf(float((len(opponent_history))/4))
-                print(str(localCombo[0]) + "," + str(localCombo[1]))
-                return combos[int(localCombo[1])][int(len(opponent_history)%4)]
+                print(str(len(opponent_history)%4))
+                return combos[int(localCombo[1])][int(localCombo[0]*4)]
                     
                             
         '''else:
