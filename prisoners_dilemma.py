@@ -168,25 +168,38 @@ def get_action(player, history, opponent_history, score, opponent_score, getting
 
 
 
-
-
     ######
     ######
-    #
+    ##
     elif player == 3:
         if getting_team_name:
-            return 'loyal vengeful'
+            return 'Bhimamoorthy_Strategy1'
         else:
             # use history, opponent_history, score, opponent_score
             # to compute your strategy
-            if len(opponent_history)==0: #It's the first round: collude
+            b_count = 0
+            c_count = 0
+            for x in opponent_history:
+                if x == 'b':
+                    b_count+=1
+                else:
+                    c_count+=1
+            if len(history)==0: #It's the first round: collude
                 return 'c'
-            elif history[-1]=='c' and opponent_history[-1]=='b':
-                return 'b' # betray is they were severely punished last time
+            elif len(opponent_history) < 25:
+                if c_count > b_count:
+                    return 'c'  
+                elif b_count > c_count:
+                    return 'b'
+                else:
+                    return 'b'
             else:
-                return 'c' #otherwise collude
-
-
+                if (b_count - 10) > c_count:
+                    return 'b'
+                elif (c_count - 10) > b_count:
+                    return 'c'
+                else:
+                    return 'c'
 
 
 
@@ -201,19 +214,17 @@ def get_action(player, history, opponent_history, score, opponent_score, getting
     #
     elif player == 4:
         if getting_team_name:
-            return 'betray every 3rd round'
+            return 'Bhimamoorthy_Strategy2'
         else:
             # use history, opponent_history, score, opponent_score
             # to compute your strategy
-            size = len(history)
-            if(size%3==0): #the number of rounds played is a multiple of 3
+            if len(history) == 0:
                 return 'c'
-            else:
+            elif opponent_history[-1]=='b':
                 return 'b'
+            else:
+                return 'c'
     
-    
-    
-
 
 
 
