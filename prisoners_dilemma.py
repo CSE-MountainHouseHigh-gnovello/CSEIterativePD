@@ -296,7 +296,7 @@ def get_action(player, history, opponent_history, score, opponent_score, getting
 
       ######
 #
-        elif player == 8:
+    elif player == 8:
         if getting_team_name:
             return 'Achlec'
         else:
