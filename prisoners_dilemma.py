@@ -168,9 +168,9 @@ def get_action(player, history, opponent_history, score, opponent_score, getting
 
 
 
+       ######
     ######
-    ######
-    ##
+    #
     elif player == 3:
         if getting_team_name:
             return 'Bhimamoorthy_Strategy1'
@@ -184,38 +184,21 @@ def get_action(player, history, opponent_history, score, opponent_score, getting
                     b_count+=1
                 else:
                     c_count+=1
-<<<<<<< HEAD
             if len(history)==0: #It's the first round: collude
                 return 'c'
             elif len(opponent_history) < 25:
                 if c_count > b_count:
-                    return 'c'  
+                    return 'c'  #test
                 elif b_count > c_count:
                     return 'b'
                 else:
                     return 'b'
             else:
-=======
-            if len(opponent_history)==0: #It's the first round: collude
-                return 'c'
-            elif len(opponent_history) < 25:
-                if c_count > b_count:
-                    return 'c'
-                elif b_count > c_count:
-                    return 'b'
-                elif b_count == c_count:
-                    return 'b'
-            elif len(opponent_history) >= 25:
->>>>>>> origin/master
                 if (b_count - 10) > c_count:
                     return 'b'
                 elif (c_count - 10) > b_count:
                     return 'c'
-<<<<<<< HEAD
                 else:
-=======
-                elif b_count == c_count:
->>>>>>> origin/master
                     return 'c'
 
 
@@ -235,42 +218,12 @@ def get_action(player, history, opponent_history, score, opponent_score, getting
         else:
             # use history, opponent_history, score, opponent_score
             # to compute your strategy
-<<<<<<< HEAD
             if len(history) == 0:
                 return 'c'
             elif opponent_history[-1]=='b':
                 return 'b'
             else:
                 return 'c'
-    
-=======
-            b_count = 0
-            c_count = 0
-            for x in history:
-                if x == 'b':
-                    b_count+=1
-                else:
-                    c_count+=1
-            if len(history)==0: #It's the first round: collude
-                return 'c'
-            elif len(opponent_history) < 25:
-                if c_count > b_count:
-                    return 'c'
-                elif b_count > c_count:
-                    return 'b'
-                elif b_count == c_count:
-                    return 'b'
-            elif len(opponent_history) >= 25:
-                if (b_count - 10) > c_count:
-                    return 'b'
-                elif (c_count - 10) > b_count:
-                    return 'b'
-                elif b_count == c_count:
-                    return 'b'
-    
-    
-
->>>>>>> origin/master
 
 
 
